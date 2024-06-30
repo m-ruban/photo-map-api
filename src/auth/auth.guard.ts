@@ -1,12 +1,16 @@
 import {
   CanActivate,
   ExecutionContext,
+  Inject,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { JwtService } from '@nestjs/jwt';
+import { Cache } from 'cache-manager';
 import { Request } from 'express';
-import { User } from 'src/users/users.service';
+import { extractTokenFromHeader } from 'src/auth/utils';
+import { User } from 'src/entities/user.entity';
 
 export interface RequestWithUser extends Request {
   user: User;
@@ -14,14 +18,24 @@ export interface RequestWithUser extends Request {
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    // get token
     const request = context.switchToHttp().getRequest() as RequestWithUser;
-    const token = this.extractTokenFromHeader(request);
+    const token = extractTokenFromHeader(request);
     if (!token) {
       throw new UnauthorizedException();
     }
+    // maybe be oudated token
+    const isOutdatedToken = await this.cacheManager.get<string>(token);
+    if (isOutdatedToken) {
+      throw new UnauthorizedException();
+    }
+    // verify
     try {
       request['user'] = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_SECRET,
@@ -30,10 +44,5 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     return true;
-  }
-
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
   }
 }

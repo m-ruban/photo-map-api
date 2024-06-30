@@ -18,12 +18,18 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: Record<string, string>) {
-    return this.authService.signIn(signInDto.username, signInDto.password);
+    return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
   @UseGuards(AuthGuard)
   @Get('profile')
   getProfile(@NestRequest() request: RequestWithUser) {
     return request.user;
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('exit')
+  exit(@NestRequest() request: RequestWithUser) {
+    return this.authService.exit(request);
   }
 }
