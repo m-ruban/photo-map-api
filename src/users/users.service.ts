@@ -13,4 +13,9 @@ export class UsersService {
   async findOne(email: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ email });
   }
+
+  async updatePassword(user_id: number, password: string): Promise<null> {
+    this.usersRepository.update({ id: user_id }, { password });
+    return null;
+  }
 }

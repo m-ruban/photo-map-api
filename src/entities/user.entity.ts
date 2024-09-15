@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { RecoveryToken } from 'src/entities/recoveryToken.entity';
 
 @Entity({
   name: 'users',
@@ -27,4 +28,7 @@ export class User {
 
   @Column()
   created_at: Date;
+
+  @OneToMany(() => RecoveryToken, (recoveryToken) => recoveryToken.user)
+  recoveryTokens: RecoveryToken[];
 }

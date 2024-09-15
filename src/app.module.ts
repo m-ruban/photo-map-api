@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { RecoveryTokensModule } from './recoveryTokens/recoveryTokens.module';
 import { DataBaseOptions } from 'src/db.config';
 import { RedisOptions } from 'src/redis.config';
 
@@ -19,6 +20,7 @@ import { RedisOptions } from 'src/redis.config';
     CacheModule.registerAsync(RedisOptions),
     AuthModule,
     UsersModule,
+    RecoveryTokensModule,
   ],
   controllers: [AppController],
   providers: [AppService],
