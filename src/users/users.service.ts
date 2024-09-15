@@ -14,6 +14,23 @@ export class UsersService {
     return this.usersRepository.findOneBy({ email });
   }
 
+  async create(
+    name: string,
+    email: string,
+    description: string,
+    password: string,
+  ): Promise<User> {
+    const user = new User();
+    user.name = name;
+    user.email = email;
+    user.description = description;
+    user.password = password;
+    user.avatar = 'test.jpg';
+    user.deleted = false;
+    await this.usersRepository.save(user);
+    return user;
+  }
+
   async updatePassword(user_id: number, password: string): Promise<null> {
     this.usersRepository.update({ id: user_id }, { password });
     return null;

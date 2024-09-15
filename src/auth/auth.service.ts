@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { UsersService } from 'src/users/users.service';
 import { RecoveryTokensService } from 'src/recoveryTokens/recoveryTokens.service';
 import { extractTokenFromHeader } from 'src/auth/utils';
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -88,5 +89,19 @@ export class AuthService {
       Number(process.env.BCRYPT_SALT_OR_ROUND),
     );
     return this.usersService.updatePassword(tokenEntity.user.id, password);
+  }
+
+  async createUser(
+    name: string,
+    email: string,
+    description: string,
+    enteredPassword: string,
+  ): Promise<User> {
+    // generate new hash for password
+    const password = await bcrypt.hash(
+      String(enteredPassword),
+      Number(process.env.BCRYPT_SALT_OR_ROUND),
+    );
+    return this.usersService.create(name, email, description, password);
   }
 }

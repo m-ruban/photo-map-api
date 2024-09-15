@@ -45,4 +45,15 @@ export class AuthController {
       updatePasswordDto.password,
     );
   }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('register')
+  register(@Body() registerDto: Record<string, string>) {
+    return this.authService.createUser(
+      registerDto.name,
+      registerDto.email,
+      registerDto.description,
+      registerDto.password,
+    );
+  }
 }
