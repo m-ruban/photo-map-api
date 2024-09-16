@@ -33,19 +33,6 @@ export class AuthController {
     return this.authService.exit(request);
   }
 
-  @Post('send-recover-token')
-  sendRevoverToken(@Body() sendRevoverTokenDto: Record<string, string>) {
-    return this.authService.sendRevoverToken(sendRevoverTokenDto.email);
-  }
-
-  @Post('update-password')
-  updatePassword(@Body() updatePasswordDto: Record<string, string>) {
-    return this.authService.updatePassword(
-      updatePasswordDto['recover-token'],
-      updatePasswordDto.password,
-    );
-  }
-
   @HttpCode(HttpStatus.OK)
   @Post('register')
   register(@Body() registerDto: Record<string, string>) {

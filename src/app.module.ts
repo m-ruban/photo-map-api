@@ -7,7 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { RecoveryTokensModule } from './recoveryTokens/recoveryTokens.module';
+import { RecoveryModule } from './recovery/recovery.module';
 import { DataBaseOptions } from 'src/db.config';
 import { RedisOptions } from 'src/redis.config';
 
@@ -19,8 +19,8 @@ import { RedisOptions } from 'src/redis.config';
     TypeOrmModule.forRootAsync(DataBaseOptions),
     CacheModule.registerAsync(RedisOptions),
     AuthModule,
+    RecoveryModule,
     UsersModule,
-    RecoveryTokensModule,
   ],
   controllers: [AppController],
   providers: [AppService],
