@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ProfileController } from './profile.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { ProfileController } from 'src/profile/profile.controller';
 
 @Module({
   imports: [

@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { RecoveryService } from './recovery.service';
+import { RecoveryService } from 'src/recovery/recovery.service';
 
 @Controller('recovery')
 export class RecoveryController {

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { RecoveryService } from './recovery.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RecoveryService } from 'src/recovery/recovery.service';
 import { RecoveryToken } from 'src/entities/recoveryToken.entity';
-import { UsersModule } from '../users/users.module';
-import { RecoveryController } from './recovery.controller';
+import { UsersModule } from 'src/users/users.module';
+import { RecoveryController } from 'src/recovery/recovery.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([RecoveryToken]), UsersModule],
