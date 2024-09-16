@@ -22,12 +22,6 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@NestRequest() request: RequestWithUser) {
-    return request.user;
-  }
-
-  @UseGuards(AuthGuard)
   @Get('exit')
   exit(@NestRequest() request: RequestWithUser) {
     return this.authService.exit(request);
