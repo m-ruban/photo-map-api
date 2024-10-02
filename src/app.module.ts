@@ -4,7 +4,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { RecoveryModule } from 'src/recovery/recovery.module';
@@ -25,6 +24,5 @@ import { RedisOptions } from 'src/redis.config';
     ProfileModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

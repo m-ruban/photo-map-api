@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { RecoveryToken } from 'src/entities/recoveryToken.entity';
+import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 
 @Entity({
   name: 'users',

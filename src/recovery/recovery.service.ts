@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RecoveryToken } from 'src/entities/recoveryToken.entity';
+import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()

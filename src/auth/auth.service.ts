@@ -6,7 +6,7 @@ import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import { UsersService } from 'src/users/users.service';
 import { extractTokenFromHeader } from 'src/auth/utils';
-import { User } from 'src/entities/user.entity';
+import { User } from 'src/users/user.entity';
 
 @Injectable()
 export class AuthService {

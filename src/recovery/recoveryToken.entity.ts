@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { User } from 'src/entities/user.entity';
+import { User } from 'src/users/user.entity';
 
 @Entity({
   name: 'recovery_tokens',

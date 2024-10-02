@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import { extractTokenFromHeader } from 'src/auth/utils';
-import { User } from 'src/entities/user.entity';
+import { User } from 'src/users/user.entity';
 
 export interface RequestWithUser extends Request {
   user: User;

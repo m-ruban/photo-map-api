@@ -1,6 +1,6 @@
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
-import { User } from 'src/entities/user.entity';
-import { RecoveryToken } from 'src/entities/recoveryToken.entity';
+import { User } from 'src/users/user.entity';
+import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 
 export const DataBaseOptions: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
