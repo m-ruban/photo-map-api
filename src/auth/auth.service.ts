@@ -16,10 +16,7 @@ export class AuthService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
-  async signIn(
-    email: string,
-    enteredPassword: string,
-  ): Promise<{ access_token: string }> {
+  async signIn(email: string, enteredPassword: string): Promise<{ access_token: string }> {
     // find user
     const user = await this.usersService.findOne(email);
     if (!user) {
@@ -49,25 +46,13 @@ export class AuthService {
     if (!token) {
       throw new UnauthorizedException();
     }
-    await this.cacheManager.set(
-      token,
-      'dummy',
-      Number(process.env.JWT_EXPIRES_IN),
-    );
+    await this.cacheManager.set(token, 'dummy', Number(process.env.JWT_EXPIRES_IN));
     return null;
   }
 
-  async createUser(
-    name: string,
-    email: string,
-    description: string,
-    enteredPassword: string,
-  ): Promise<User> {
+  async createUser(name: string, email: string, description: string, enteredPassword: string): Promise<User> {
     // generate new hash for password
-    const password = await bcrypt.hash(
-      String(enteredPassword),
-      Number(process.env.BCRYPT_SALT_OR_ROUND),
-    );
+    const password = await bcrypt.hash(String(enteredPassword), Number(process.env.BCRYPT_SALT_OR_ROUND));
     return this.usersService.create(name, email, description, password);
   }
 }

@@ -12,9 +12,6 @@ export class RecoveryController {
 
   @Post('change-password')
   updatePassword(@Body() requestDto: Record<string, string>) {
-    return this.recoveryService.updatePassword(
-      requestDto['recover-token'],
-      requestDto.password,
-    );
+    return this.recoveryService.updatePassword(requestDto['recover-token'], requestDto.password);
   }
 }

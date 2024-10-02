@@ -14,12 +14,7 @@ export class UsersService {
     return this.usersRepository.findOneBy({ email });
   }
 
-  async create(
-    name: string,
-    email: string,
-    description: string,
-    password: string,
-  ): Promise<User> {
+  async create(name: string, email: string, description: string, password: string): Promise<User> {
     const user = new User();
     user.name = name;
     user.email = email;
@@ -31,8 +26,8 @@ export class UsersService {
     return user;
   }
 
-  async updatePassword(user_id: number, password: string): Promise<null> {
-    this.usersRepository.update({ id: user_id }, { password });
+  async update(user_id: number, fields: Partial<User>): Promise<null> {
+    this.usersRepository.update({ id: user_id }, fields);
     return null;
   }
 }
