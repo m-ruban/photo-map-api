@@ -7,6 +7,7 @@ import { AppController } from 'src/app.controller';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { RecoveryModule } from 'src/recovery/recovery.module';
+import { SubscriptionModule } from 'src/subscription/subscription.module';
 import { ProfileModule } from 'src/profile/profile.module';
 import { DataBaseOptions } from 'src/db.config';
 import { RedisOptions } from 'src/redis.config';
@@ -22,6 +23,7 @@ import { RedisOptions } from 'src/redis.config';
     RecoveryModule,
     UsersModule,
     ProfileModule,
+    SubscriptionModule,
   ],
   controllers: [AppController],
 })

@@ -13,6 +13,6 @@ export default new DataSource({
   password: process.env.DATABASE_PASSWORD,
   synchronize: false,
   logging: true,
-  entities: ['src/entities/*.ts'],
+  entities: ['src/**/*.entity.ts'],
   migrations: ['src/migrations/*.ts'],
 });

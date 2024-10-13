@@ -1,6 +1,7 @@
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
 import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
+import { Subscription } from 'src/subscription/subscription.entity';
 
 export const DataBaseOptions: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
@@ -12,6 +13,6 @@ export const DataBaseOptions: TypeOrmModuleAsyncOptions = {
     password: process.env.DATABASE_PASSWORD,
     synchronize: false,
     logging: true,
-    entities: [User, RecoveryToken],
+    entities: [User, RecoveryToken, Subscription],
   }),
 };
