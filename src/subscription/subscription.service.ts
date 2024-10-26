@@ -30,7 +30,7 @@ export class SubscriptionsService {
     if (subscription.owner_user_id !== owner) {
       throw new UnauthorizedException();
     }
-    this.subscriptionsRepository.delete({ id: subscriptionId });
+    await this.subscriptionsRepository.delete({ id: subscriptionId });
     return null;
   }
 }

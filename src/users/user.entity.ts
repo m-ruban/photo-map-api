@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 import { Subscription } from 'src/subscription/subscription.entity';
+import { Notification } from 'src/notification/notification.entity';
 
 @Entity({
   name: 'users',
@@ -38,4 +39,7 @@ export class User {
 
   @OneToMany(() => Subscription, (subscription) => subscription.subscribedUser)
   subscribers: Subscription[]; // подписчики пользователя
+
+  @OneToMany(() => Notification, (notification) => notification.owner)
+  notifications: Notification[];
 }
