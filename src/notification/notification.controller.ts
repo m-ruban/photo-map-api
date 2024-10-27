@@ -8,13 +8,13 @@ export class NotificationController {
 
   @UseGuards(AuthGuard)
   @Get('/')
-  getSubscription(@NestRequest() request: RequestWithUser) {
+  getNotifications(@NestRequest() request: RequestWithUser) {
     return this.notificationsService.findAllByUser(request.user.id);
   }
 
   @UseGuards(AuthGuard)
   @Delete('/:noticeId')
-  deleteSubscription(@Param() params: { noticeId: number }, @NestRequest() request: RequestWithUser) {
+  deleteNotification(@Param() params: { noticeId: number }, @NestRequest() request: RequestWithUser) {
     return this.notificationsService.delete(request.user.id, params.noticeId);
   }
 }

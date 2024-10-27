@@ -11,6 +11,7 @@ import { RecoveryModule } from 'src/recovery/recovery.module';
 import { SubscriptionModule } from 'src/subscription/subscription.module';
 import { ProfileModule } from 'src/profile/profile.module';
 import { NotificationModule } from 'src/notification/notification.module';
+import { PlacenModule } from 'src/place/place.module';
 import { DataBaseOptions } from 'src/configs/db.config';
 import { RedisOptions } from 'src/configs/redis.config';
 
@@ -28,6 +29,7 @@ import { RedisOptions } from 'src/configs/redis.config';
     ProfileModule,
     SubscriptionModule,
     NotificationModule,
+    PlacenModule,
   ],
   controllers: [AppController],
 })

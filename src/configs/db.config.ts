@@ -3,6 +3,7 @@ import { User } from 'src/users/user.entity';
 import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 import { Subscription } from 'src/subscription/subscription.entity';
 import { Notification } from 'src/notification/notification.entity';
+import { Place } from 'src/place/place.entity';
 
 export const DataBaseOptions: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
@@ -14,6 +15,6 @@ export const DataBaseOptions: TypeOrmModuleAsyncOptions = {
     password: process.env.DATABASE_PASSWORD,
     synchronize: false,
     logging: true,
-    entities: [User, RecoveryToken, Subscription, Notification],
+    entities: [User, RecoveryToken, Subscription, Notification, Place],
   }),
 };
