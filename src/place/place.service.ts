@@ -48,7 +48,6 @@ export class PlacesService {
       'INSERT INTO places (user_id, point)' + ` VALUES ($1, 'SRID=4326;POINT(${lat} ${long})')` + ' RETURNING id',
       [user_id],
     );
-    console.log(result);
     const place = new Place();
     place.id = result[0].id;
     place.point = {

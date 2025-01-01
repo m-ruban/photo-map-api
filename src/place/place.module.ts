@@ -10,4 +10,4 @@ import { PlaceController } from 'src/place/place.controller';
   exports: [PlacesService],
   controllers: [PlaceController],
 })
-export class PlacenModule {}
+export class PlaceModule {}
