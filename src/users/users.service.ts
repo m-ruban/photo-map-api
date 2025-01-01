@@ -22,8 +22,7 @@ export class UsersService {
     user.password = password;
     user.avatar = 'test.jpg';
     user.deleted = false;
-    await this.usersRepository.save(user);
-    return user;
+    return this.usersRepository.save(user);
   }
 
   async update(user_id: number, fields: Partial<User>): Promise<null> {
