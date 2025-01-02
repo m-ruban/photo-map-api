@@ -20,7 +20,6 @@ export class UsersService {
     user.email = email;
     user.description = description;
     user.password = password;
-    user.avatar = 'test.jpg';
     user.deleted = false;
     return this.usersRepository.save(user);
   }

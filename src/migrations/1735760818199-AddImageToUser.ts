@@ -21,6 +21,6 @@ export class AddImageToUser1735760818199 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropColumn('images', 'image_id');
+    await queryRunner.dropColumn('users', 'image_id');
   }
 }

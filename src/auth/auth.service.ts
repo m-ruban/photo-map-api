@@ -33,7 +33,6 @@ export class AuthService {
       name: user.name,
       email: user.email,
       description: user.description,
-      avatar: user.avatar,
       createdAt: user.created_at,
     };
     return {

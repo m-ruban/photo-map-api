@@ -24,9 +24,6 @@ export class User {
   password: string;
 
   @Column()
-  avatar: string;
-
-  @Column()
   deleted: boolean;
 
   @Column()
