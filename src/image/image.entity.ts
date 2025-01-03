@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Topic } from 'src/topic/topic.entity';
 
 @Entity({
   name: 'images',
@@ -25,6 +26,13 @@ export class Image {
   @Column({ name: 'topic_id', nullable: true })
   topicId: number;
 
+  @Column({ name: 'user_id', nullable: true })
+  userId: number;
+
   @Column()
   created_at: Date;
+
+  @ManyToOne(() => Topic, (topic) => topic.images)
+  @JoinColumn({ name: 'topic_id' })
+  topic: Topic;
 }

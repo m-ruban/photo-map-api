@@ -3,6 +3,7 @@ import { RecoveryToken } from 'src/recovery/recoveryToken.entity';
 import { Subscription } from 'src/subscription/subscription.entity';
 import { Notification } from 'src/notification/notification.entity';
 import { Place } from 'src/place/place.entity';
+import { Topic } from 'src/topic/topic.entity';
 
 @Entity({
   name: 'users',
@@ -43,4 +44,7 @@ export class User {
 
   @OneToMany(() => Place, (place) => place.owner)
   places: Place[];
+
+  @OneToMany(() => Topic, (topic) => topic.owner)
+  topics: Topic[];
 }

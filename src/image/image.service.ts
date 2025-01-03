@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync, unlinkSync } from 'fs';
 import { parse, join } from 'path';
 import * as sharp from 'sharp';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Image } from 'src/image/image.entity';
@@ -87,9 +87,8 @@ export class ImageService {
     return await this.imageRepository.save(image);
   }
 
-  // TODO will be used on topic save
-  async linkTopic(image: Image, topicId: number): Promise<Image> {
-    image.topicId = topicId;
-    return await this.imageRepository.save(image);
+  async linkTopic(topicId: number, images: number[]): Promise<null> {
+    await this.imageRepository.update({ id: In(images) }, { topicId });
+    return null;
   }
 }

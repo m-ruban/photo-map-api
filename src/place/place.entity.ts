@@ -8,11 +8,11 @@ export class Place {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('point')
-  point: {
-    type: string;
-    coordinates: number[];
-  };
+  @Column({
+    type: 'geometry',
+    srid: 4326,
+  })
+  point: string;
 
   @Column()
   created_at: Date;
