@@ -24,7 +24,7 @@ export class Image {
   pathL: string;
 
   @Column({ name: 'topic_id', nullable: true })
-  topicId: number;
+  topicId: number | null;
 
   @Column({ name: 'user_id', nullable: true })
   userId: number;

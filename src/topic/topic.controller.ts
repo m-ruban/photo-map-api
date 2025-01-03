@@ -1,8 +1,8 @@
-import { Controller, Get, UseGuards, Body, Param, Post, Request as NestRequest, Delete } from '@nestjs/common';
+import { Controller, Get, UseGuards, Body, Param, Post, Request as NestRequest, Delete, Patch } from '@nestjs/common';
 import { TopicService } from 'src/topic/topic.service';
 import { AuthGuard, RequestWithUser } from 'src/auth/auth.guard';
 
-interface RequestCreateTopic {
+interface RequestTopic {
   description: string;
   privated: boolean;
   lat: number;
@@ -23,7 +23,7 @@ export class TopicController {
 
   @UseGuards(AuthGuard)
   @Post()
-  createTopic(@Body() requestDto: RequestCreateTopic, @NestRequest() request: RequestWithUser) {
+  createTopic(@Body() requestDto: RequestTopic, @NestRequest() request: RequestWithUser) {
     return this.topicService.create(
       requestDto.description,
       requestDto.privated,
@@ -32,6 +32,25 @@ export class TopicController {
       requestDto.address,
       requestDto.images,
       request.user.id,
+    );
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('/:topicId')
+  updateTopic(
+    @Body() requestDto: RequestTopic,
+    @Param() params: { topicId: number },
+    @NestRequest() request: RequestWithUser,
+  ) {
+    return this.topicService.update(
+      request.user.id,
+      params.topicId,
+      requestDto.description,
+      requestDto.privated,
+      requestDto.lat,
+      requestDto.long,
+      requestDto.address,
+      requestDto.images,
     );
   }
 

@@ -91,4 +91,9 @@ export class ImageService {
     await this.imageRepository.update({ id: In(images) }, { topicId });
     return null;
   }
+
+  async unlinkTopic(topicId: number): Promise<null> {
+    await this.imageRepository.update({ topicId }, { topicId: null });
+    return null;
+  }
 }
