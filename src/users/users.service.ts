@@ -11,7 +11,11 @@ export class UsersService {
   ) {}
 
   async findOne(email: string): Promise<User | null> {
-    return this.usersRepository.findOneBy({ email });
+    return this.usersRepository
+      .createQueryBuilder()
+      .addSelect('"User"."password" AS "User_password"')
+      .where({ email })
+      .getOne();
   }
 
   async create(name: string, email: string, description: string, password: string): Promise<User> {

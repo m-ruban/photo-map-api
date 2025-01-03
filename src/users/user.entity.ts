@@ -21,7 +21,7 @@ export class User {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column()
