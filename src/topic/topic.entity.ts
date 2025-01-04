@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Image } from 'src/image/image.entity';
+import { Complaint } from 'src/complaint/complaint.entity';
 
 @Entity({
   name: 'topics',
@@ -42,4 +43,7 @@ export class Topic {
 
   @OneToMany(() => Image, (image) => image.topic)
   images: Image[];
+
+  @OneToMany(() => Complaint, (complaint) => complaint.topic)
+  complaints: Complaint[];
 }
