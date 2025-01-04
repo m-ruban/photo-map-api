@@ -9,8 +9,7 @@ export class ProfileController {
   @UseGuards(AuthGuard)
   @Get('/')
   getProfile(@NestRequest() request: RequestWithUser) {
-    // TODO return info from db
-    return request.user;
+    return this.userService.findOneById(request.user.id);
   }
 
   @UseGuards(AuthGuard)
