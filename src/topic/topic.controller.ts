@@ -1,4 +1,15 @@
-import { Controller, Get, UseGuards, Body, Param, Post, Request as NestRequest, Delete, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  Body,
+  Param,
+  Post,
+  Request as NestRequest,
+  Delete,
+  Patch,
+  Query,
+} from '@nestjs/common';
 import { TopicService } from 'src/topic/topic.service';
 import { AuthGuard, RequestWithUser } from 'src/auth/auth.guard';
 
@@ -16,9 +27,22 @@ export class TopicController {
   constructor(private topicService: TopicService) {}
 
   @UseGuards(AuthGuard)
-  @Get('/:userId')
+  @Get('by-user/:userId')
   getTopics(@Param() params: { userId: number }) {
     return this.topicService.findAllByUser(params.userId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/search')
+  searchTopics(
+    @Query('from') from: string,
+    @Query('to') to: string,
+    @Query('leftTopLat') leftTopLat: number,
+    @Query('leftTopLong') leftTopLong: number,
+    @Query('rightBottomLat') rightBottomLat: number,
+    @Query('rightBottomLong') rightBottomLong: number,
+  ) {
+    return this.topicService.findAllByParams(from, to, leftTopLat, leftTopLong, rightBottomLat, rightBottomLong);
   }
 
   @UseGuards(AuthGuard)

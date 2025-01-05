@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Between, Raw } from 'typeorm';
 import { Topic } from 'src/topic/topic.entity';
 import { ImageService } from 'src/image/image.service';
 
@@ -15,6 +15,40 @@ export class TopicService {
   async findAllByUser(userId: number): Promise<Topic[]> {
     const topics = await this.topicRepository.find({
       where: { user_id: userId, deleted: false },
+      relations: ['images', 'owner'],
+      take: 10,
+      order: { id: 'ASC' },
+    });
+    return topics;
+  }
+
+  async findAllByParams(
+    from: string,
+    to: string,
+    leftTopLat: number,
+    leftTopLong: number,
+    rightBottomLat: number,
+    rightBottomLong: number,
+  ): Promise<Topic[]> {
+    const where: Record<string, unknown> = { deleted: false };
+    if (from && to) {
+      where.createdAt = Between(new Date(from).toISOString(), new Date(to).toISOString());
+    }
+    if (leftTopLat && leftTopLong && rightBottomLat && rightBottomLong) {
+      const rightTopLat = rightBottomLat;
+      const rightTopLong = leftTopLong;
+      const leftBottomLat = leftTopLat;
+      const leftBottomLong = rightBottomLong;
+      const polygon =
+        `SRID=4326;POLYGON((${leftTopLat} ${leftTopLong},` +
+        `${rightTopLat} ${rightTopLong}, ` +
+        `${rightBottomLat} ${rightBottomLong}, ` +
+        `${leftBottomLat} ${leftBottomLong}, ` +
+        `${leftTopLat} ${leftTopLong}))`;
+      where.point = Raw(() => `ST_Contains('${polygon}', "Topic"."point"::geometry)`);
+    }
+    const topics = await this.topicRepository.find({
+      where,
       relations: ['images', 'owner'],
       take: 10,
       order: { id: 'ASC' },
