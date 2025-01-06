@@ -5,6 +5,7 @@ import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api/v1');
   checkAndCreatePath(PATH_TEMP_IMAGES);
   app.use(helmet());
   await app.listen(3000);
