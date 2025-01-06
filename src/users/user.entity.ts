@@ -5,6 +5,7 @@ import { Notification } from 'src/notification/notification.entity';
 import { Place } from 'src/place/place.entity';
 import { Topic } from 'src/topic/topic.entity';
 import { Complaint } from 'src/complaint/complaint.entity';
+import { Image } from 'src/image/image.entity';
 
 @Entity({
   name: 'users',
@@ -48,6 +49,9 @@ export class User {
 
   @OneToMany(() => Topic, (topic) => topic.owner)
   topics: Topic[];
+
+  @OneToMany(() => Image, (image) => image.owner)
+  avatars: Image[];
 
   @OneToMany(() => Complaint, (complaint) => complaint.owner)
   complaints: Complaint[];

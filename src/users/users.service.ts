@@ -10,8 +10,11 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findOneById(userId: number): Promise<User | null> {
-    return this.usersRepository.createQueryBuilder().where({ id: userId }).getOne();
+  async findOneById(userId: number, relations = ['avatars']): Promise<User | null> {
+    return this.usersRepository.findOne({
+      where: { id: userId },
+      relations,
+    });
   }
 
   async findOneByEmail(email: string): Promise<User | null> {

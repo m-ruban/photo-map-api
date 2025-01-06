@@ -15,6 +15,7 @@ import { PlaceModule } from 'src/place/place.module';
 import { ImageModule } from 'src/image/image.module';
 import { TopicModule } from 'src/topic/topic.module';
 import { ComplaintModule } from 'src/complaint/complaint.module';
+import { PagesModule } from 'src/pages/pages.module';
 import { DataBaseOptions } from 'src/configs/db.config';
 import { RedisOptions } from 'src/configs/redis.config';
 
@@ -36,6 +37,7 @@ import { RedisOptions } from 'src/configs/redis.config';
     ImageModule,
     TopicModule,
     ComplaintModule,
+    PagesModule,
   ],
   controllers: [AppController],
 })

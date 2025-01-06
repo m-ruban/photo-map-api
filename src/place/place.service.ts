@@ -15,7 +15,7 @@ export class PlacesService {
   async findAllByUser(user_id: number): Promise<Place[]> {
     const places = await this.placesRepository.find({
       where: { user_id },
-      take: 10,
+      take: 20,
       order: { id: 'ASC' },
     });
     return places;

@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Topic } from 'src/topic/topic.entity';
+import { User } from 'src/users/user.entity';
 
 @Entity({
   name: 'images',
@@ -35,4 +36,8 @@ export class Image {
   @ManyToOne(() => Topic, (topic) => topic.images)
   @JoinColumn({ name: 'topic_id' })
   topic: Topic;
+
+  @ManyToOne(() => User, (user) => user.avatars)
+  @JoinColumn({ name: 'user_id' })
+  owner: User;
 }

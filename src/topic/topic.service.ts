@@ -16,7 +16,7 @@ export class TopicService {
     const topics = await this.topicRepository.find({
       where: { user_id: userId, deleted: false },
       relations: ['images', 'owner'],
-      take: 10,
+      take: 20,
       order: { id: 'ASC' },
     });
     return topics;
@@ -25,10 +25,10 @@ export class TopicService {
   async findAllByParams(
     from: string,
     to: string,
-    leftTopLat: number,
-    leftTopLong: number,
-    rightBottomLat: number,
-    rightBottomLong: number,
+    leftTopLat?: number,
+    leftTopLong?: number,
+    rightBottomLat?: number,
+    rightBottomLong?: number,
   ): Promise<Topic[]> {
     const where: Record<string, unknown> = { deleted: false };
     if (from && to) {
@@ -50,7 +50,7 @@ export class TopicService {
     const topics = await this.topicRepository.find({
       where,
       relations: ['images', 'owner'],
-      take: 10,
+      take: 20,
       order: { id: 'ASC' },
     });
     return topics;
