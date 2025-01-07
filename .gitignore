@@ -58,6 +58,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # some custom script
 deploy.sh
 commands.sh
+photo-map-api.service
 
 # images
 /public/images/
